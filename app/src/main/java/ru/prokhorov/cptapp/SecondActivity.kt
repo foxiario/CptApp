@@ -40,10 +40,10 @@ class SecondActivity : AppCompatActivity() {
         titleText.text = title
         titleText.setTextColor(Color.BLACK)
         titleText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F)
-        titleText.setPadding(40,0,0,0)
+        titleText.setPadding(40, 0, 0, 0)
 
         subtitleText.text = subtitle
-        subtitleText.setPadding(40,0,0,0)
+        subtitleText.setPadding(40, 0, 0, 0)
 
         val displayMetrics = DisplayMetrics()
 
@@ -56,7 +56,7 @@ class SecondActivity : AppCompatActivity() {
         image.layoutParams.height = width
         image.scaleType = ImageView.ScaleType.CENTER_CROP
         val param = image.layoutParams as ViewGroup.MarginLayoutParams
-        param.setMargins(0,0,0,30)
+        param.setMargins(0, 0, 0, 30)
         image.layoutParams = param
 
         supportActionBar?.title = title

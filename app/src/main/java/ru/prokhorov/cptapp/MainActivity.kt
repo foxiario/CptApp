@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         params.height = 150
         itemsLayout.layoutParams = params
         val param = params as ViewGroup.MarginLayoutParams
-        param.setMargins(0,0,0,30)
+        param.setMargins(0, 0, 0, 30)
 
         val itemImage = ImageView(this)
         itemsLayout.addView(itemImage)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         val textLayout = LinearLayout(this)
         textLayout.orientation = LinearLayout.VERTICAL
         itemsLayout.addView(textLayout)
-        textLayout.setPadding(30,0,0,0)
+        textLayout.setPadding(30, 0, 0, 0)
 
         val itemTitle = TextView(this)
         textLayout.addView(itemTitle)
