@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Мои фото</string>
+    <string name="sample_text">Text</string>
 </resources>

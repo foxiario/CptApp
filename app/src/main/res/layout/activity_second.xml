@@ -14,5 +14,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:id="@+id/imageView_second"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/bird" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/sample_text"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/subtitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/sample_text" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

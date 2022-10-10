@@ -6,17 +6,13 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import java.io.ByteArrayOutputStream
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,44 +47,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createItem(drawable: Drawable?, title: String, subtitle: String) {
-        val linearLayout = findViewById<View>(R.id.linearLayout_main) as LinearLayout
-        val itemsLayout = LinearLayout(this)
-        linearLayout.addView(itemsLayout)
+        val ltInflater = layoutInflater
+        val linLayout = findViewById<View>(R.id.linearLayout_main) as LinearLayout
+        val itemLayout = ltInflater.inflate(R.layout.item, linLayout, false) as LinearLayout
 
-        itemsLayout.orientation = LinearLayout.HORIZONTAL
-        addItemEventListener(itemsLayout)
+        linLayout.addView(itemLayout)
+        addItemEventListener(itemLayout)
 
-        itemsLayout.requestLayout()
-        val params = itemsLayout.layoutParams
-        params.width = LayoutParams.MATCH_PARENT
-        params.height = 150
-        itemsLayout.layoutParams = params
-        val param = params as ViewGroup.MarginLayoutParams
-        param.setMargins(0, 0, 0, 30)
-
-        val itemImage = ImageView(this)
-        itemsLayout.addView(itemImage)
-
-        itemImage.requestLayout()
-        itemImage.setImageDrawable(drawable)
-        itemImage.layoutParams.width = 150
-        itemImage.layoutParams.height = 150
-        itemImage.scaleType = ImageView.ScaleType.CENTER_CROP
-
-        val textLayout = LinearLayout(this)
-        textLayout.orientation = LinearLayout.VERTICAL
-        itemsLayout.addView(textLayout)
-        textLayout.setPadding(30, 0, 0, 0)
-
-        val itemTitle = TextView(this)
-        textLayout.addView(itemTitle)
-        itemTitle.text = title
-        itemTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F)
-        itemTitle.setTextColor(Color.BLACK)
-
-        val itemSubtitle = TextView(this)
-        textLayout.addView(itemSubtitle)
-        itemSubtitle.text = subtitle
+        var view: View?
+        val count = itemLayout.childCount
+        for (i in 0 until count) {
+            view = itemLayout.getChildAt(i)
+            if (view is ImageView) {
+                view.setImageDrawable(drawable)
+            }
+            if (view is LinearLayout) {
+                val count2 = view.childCount
+                for (l in 0 until count2) {
+                    println(view)
+                    val view2 = view.getChildAt(l)
+                    if (view2 is TextView) {
+                        if (view2.currentTextColor == Color.BLACK) {
+                            view2.text = title
+                        } else {
+                            view2.text = subtitle
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun addItemEventListener(itemsLayout: LinearLayout) {
