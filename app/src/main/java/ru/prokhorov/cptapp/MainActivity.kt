@@ -2,7 +2,6 @@ package ru.prokhorov.cptapp
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -12,6 +11,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toBitmapOrNull
+import androidx.core.view.children
 import java.io.ByteArrayOutputStream
 
 class MainActivity : AppCompatActivity() {
@@ -54,24 +56,15 @@ class MainActivity : AppCompatActivity() {
         linLayout.addView(itemLayout)
         addItemEventListener(itemLayout)
 
-        var view: View?
-        val count = itemLayout.childCount
-        for (i in 0 until count) {
-            view = itemLayout.getChildAt(i)
+        itemLayout.children.forEach { view ->
             if (view is ImageView) {
                 view.setImageDrawable(drawable)
             }
             if (view is LinearLayout) {
-                val count2 = view.childCount
-                for (l in 0 until count2) {
-                    println(view)
-                    val view2 = view.getChildAt(l)
-                    if (view2 is TextView) {
-                        if (view2.currentTextColor == Color.BLACK) {
-                            view2.text = title
-                        } else {
-                            view2.text = subtitle
-                        }
+                view.children.forEach { childView ->
+                    if (childView is TextView) {
+                        if (childView.id == R.id.titleTextView_item) childView.text = title
+                        if (childView.id == R.id.subtitleTextView_item) childView.text = subtitle
                     }
                 }
             }
@@ -81,44 +74,38 @@ class MainActivity : AppCompatActivity() {
     private fun addItemEventListener(itemsLayout: LinearLayout) {
         itemsLayout.setOnClickListener {
             val itemLayout = it as LinearLayout
-            val count = itemLayout.childCount
-
-            var view: View?
             var image: Drawable
-
             val intent = Intent(this, SecondActivity::class.java)
 
-            for (i in 0 until count) {
-                view = itemLayout.getChildAt(i)
+            itemLayout.children.forEach { view ->
                 if (view is ImageView) {
                     image = view.drawable
                     if (image is BitmapDrawable) {
                         val bitmapDrawable = image
-                        if (bitmapDrawable.bitmap != null) {
-                            val bitmap = bitmapDrawable.bitmap
+                        if (bitmapDrawable.toBitmapOrNull() != null) {
+                            val bitmap = bitmapDrawable.toBitmap(300, 300)
                             val baos = ByteArrayOutputStream()
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 75, baos)
                             val b: ByteArray = baos.toByteArray()
                             intent.putExtra("picture", b)
                         }
                     }
                 }
                 if (view is LinearLayout) {
-                    val count2 = view.childCount
-                    for (l in 0 until count2) {
-                        println(view)
-                        val view2 = view.getChildAt(l)
+                    view.children.forEach { view2 ->
                         if (view2 is TextView) {
-                            if (view2.currentTextColor == Color.BLACK) {
-                                intent.putExtra("title", view2.text)
-                            } else {
-                                intent.putExtra("subtitle", view2.text)
-                            }
+                            if (view2.id == R.id.titleTextView_item) intent.putExtra(
+                                "title",
+                                view2.text
+                            )
+                            if (view2.id == R.id.subtitleTextView_item) intent.putExtra(
+                                "subtitle",
+                                view2.text
+                            )
                         }
                     }
                 }
             }
-
             startActivity(intent)
         }
     }

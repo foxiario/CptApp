@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-
 class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +17,11 @@ class SecondActivity : AppCompatActivity() {
         supportActionBar?.title = title
 
         val extras = intent.extras
-        val b = extras!!.getByteArray("picture")
+        val imageByteArray = extras!!.getByteArray("picture")
         val title = extras.getString("title")
         val subtitle = extras.getString("subtitle")
 
-        val bmp = BitmapFactory.decodeByteArray(b, 0, b!!.size)
+        val bmp = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray!!.size)
         val image = findViewById<View>(R.id.imageView_second) as ImageView
         image.setImageBitmap(bmp)
 
