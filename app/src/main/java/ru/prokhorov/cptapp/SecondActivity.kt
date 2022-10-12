@@ -1,10 +1,6 @@
 package ru.prokhorov.cptapp
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,26 +13,21 @@ class SecondActivity : AppCompatActivity() {
         supportActionBar?.title = title
 
         val extras = intent.extras
-        val imageByteArray = extras!!.getByteArray("picture")
-        val title = extras.getString("title")
-        val subtitle = extras.getString("subtitle")
 
-        val bmp = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray!!.size)
-        val image = findViewById<View>(R.id.imageView_second) as ImageView
-        image.setImageBitmap(bmp)
+        val title = extras?.getString(EXTRAS_TITLE)
+        val subtitle = extras?.getString(EXTRAS_SUBTITLE)
+        val drawableID = extras?.getInt(EXTRAS_DRAWABLE_ID)
 
-        val titleText = findViewById<View>(R.id.titleTextView) as TextView
+        val image = findViewById<ImageView>(R.id.imageView_second)
+
+        if (drawableID != null) {
+            image.setImageResource(drawableID)
+        }
+
+        val titleText = findViewById<TextView>(R.id.titleTextView)
         titleText.text = title
 
-        val subtitleText = findViewById<View>(R.id.subtitleTextView) as TextView
+        val subtitleText = findViewById<TextView>(R.id.subtitleTextView)
         subtitleText.text = subtitle
-
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val width = displayMetrics.widthPixels
-        image.requestLayout()
-        image.layoutParams.height = width
-        val param = image.layoutParams as ViewGroup.MarginLayoutParams
-        image.layoutParams = param
     }
 }

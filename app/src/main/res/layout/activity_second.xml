@@ -6,38 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".SecondActivity">
 
+    <ImageView
+        android:id="@+id/imageView_second"
+        android:layout_width="@dimen/match_constraint"
+        android:layout_height="@dimen/match_constraint"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bird" />
+
     <LinearLayout
         android:id="@+id/test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/match_constraint"
+        android:layout_height="@dimen/match_constraint"
+        android:layout_marginStart="@dimen/second_layout_horizontal_margin"
+        android:layout_marginTop="@dimen/second_layout_top_margin"
+        android:layout_marginEnd="@dimen/second_layout_horizontal_margin"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-        <ImageView
-            android:id="@+id/imageView_second"
-            android:layout_width="match_parent"
-            android:layout_height="360dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/bird" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_second">
 
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
             android:text="@string/sample_text"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="@dimen/item_title_text_size" />
 
         <TextView
             android:id="@+id/subtitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="@string/sample_text" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
