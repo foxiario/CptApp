@@ -8,6 +8,5 @@
     <dimen name="item_image_size">60dp</dimen>
     <dimen name="item_height">60dp</dimen>
     <dimen name="item_top_margin">8dp</dimen>
-    <dimen name="match_constraint">0dp</dimen>
     <dimen name="item_title_text_size">24sp</dimen>
 </resources>

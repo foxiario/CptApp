@@ -10,24 +10,23 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = title
 
-        val extras = intent.extras
+        intent.extras?.let {
+            val title = it.getString(EXTRAS_TITLE)
+            val subtitle = it.getString(EXTRAS_SUBTITLE)
+            val drawableID = it.getInt(EXTRAS_DRAWABLE_ID)
 
-        val title = extras?.getString(EXTRAS_TITLE)
-        val subtitle = extras?.getString(EXTRAS_SUBTITLE)
-        val drawableID = extras?.getInt(EXTRAS_DRAWABLE_ID)
+            val image = findViewById<ImageView>(R.id.imageView_second)
 
-        val image = findViewById<ImageView>(R.id.imageView_second)
-
-        if (drawableID != null) {
             image.setImageResource(drawableID)
+
+            val titleText = findViewById<TextView>(R.id.titleTextView)
+            titleText.text = title
+
+            supportActionBar?.title = title
+
+            val subtitleText = findViewById<TextView>(R.id.subtitleTextView)
+            subtitleText.text = subtitle
         }
-
-        val titleText = findViewById<TextView>(R.id.titleTextView)
-        titleText.text = title
-
-        val subtitleText = findViewById<TextView>(R.id.subtitleTextView)
-        subtitleText.text = subtitle
     }
 }

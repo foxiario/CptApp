@@ -42,11 +42,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         itemLayout.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-
-            intent.putExtra(EXTRAS_DRAWABLE_ID, drawableID)
-            intent.putExtra(EXTRAS_TITLE, title)
-            intent.putExtra(EXTRAS_SUBTITLE, subtitle)
+            val intent = Intent(this, SecondActivity::class.java).apply{
+                putExtra(EXTRAS_DRAWABLE_ID, drawableID)
+                putExtra(EXTRAS_TITLE, title)
+                putExtra(EXTRAS_SUBTITLE, subtitle)
+            }
 
             startActivity(intent)
         }
