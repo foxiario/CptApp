@@ -1,9 +1,9 @@
 package ru.prokhorov.cptapp
 
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 
 class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,11 +14,12 @@ class SecondActivity : AppCompatActivity() {
         intent.extras?.let {
             val title = it.getString(EXTRAS_TITLE)
             val subtitle = it.getString(EXTRAS_SUBTITLE)
-            val drawableID = it.getInt(EXTRAS_DRAWABLE_ID)
+            val imageUrl = it.getString(EXTRAS_IMAGE_URL)
 
-            val image = findViewById<ImageView>(R.id.imageView_second)
-
-            image.setImageResource(drawableID)
+            Glide
+                .with(this)
+                .load(imageUrl)
+                .into(findViewById(R.id.imageView_second))
 
             val titleText = findViewById<TextView>(R.id.titleTextView)
             titleText.text = title
